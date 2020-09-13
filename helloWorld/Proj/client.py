@@ -127,7 +127,7 @@ class Client:
     def recommend_on_the_best_suitable_book(self):
         most_suitable = ["", 0]
         for lib in self.list_of_libraries_registered_to:
-            for book in lib.listOfBooks:
+            for book in lib.list_of_books:
                 if (book.comic * self.comic + book.dramatic * self.dramatic + book.educational * self.educational) >= self.joy_threshold \
                         and (book.comic * self.comic + book.dramatic * self.dramatic + book.educational * self.educational) > most_suitable[1]:
                     most_suitable[0] = book.title + " by " + book.author
