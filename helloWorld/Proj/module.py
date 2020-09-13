@@ -48,6 +48,23 @@ class Library:
             i += 1
         return listInf
 
+    def removeBookFromLibrary(self):###not complete
+        bookToRemove = input("what book should the system erase from the library? ")
+        i = 0
+        count = 0
+        deletionSuccess = 0
+        bookWhoGotDeleted = ""
+        check = ""
+        for book in self.listOfBooks:
+            check = book.title + " by " + book.author
+            if bookToRemove == check:
+                bookWhoGotDeleted = check
+                del self.listOfBooks[i]
+                deletionSuccess = 1
+                count += 1
+        if deletionSuccess == 1:
+            print("the book " + bookWhoGotDeleted + " was erased from the library in " + str(count) + " copies")
+
 ##################
 class Book:
     def __init__(self, title = "", author = "", publicationYear =0  #adding a book to the lib
@@ -66,8 +83,9 @@ class Book:
         print("book Title:", self.title, "\n\tautor:", self.author, "\n\tPublicationYear:", str(self.publicationYear)
             , "\n\tComic:", str(self.comic), "\n\tDramatic:", str(self.dramatic), "\n\tEducational:", str(self.educational) + "\n")
 
-class Client:
 
+##################
+class Client:
     def __init__(self, firstName = "Shniki", lastName = "Abutbul", comic = 0, dramatic = 0, educational = 0, joiThreshold = 0, listOfLibrariesRegisteredTo=[]):
         self.firstName = firstName
         self.lastName = lastName
@@ -90,8 +108,9 @@ class Client:
         print("first name: " + self.firstName+"\nlast name: "+self.lastName+"\nID: "+str(self.id))
 
     def borrowBook(self):
+        #  executing the act of book borrowing by client
         success = 0
-        neededBook = input("what book would you like to borrow? ")
+        neededBook = input("which book would you like to borrow? ")
         for lib in self.listOfLibrariesRegisteredTo:
             if neededBook in lib.dictOfNumOfBooks:  #checks if the book is in the library
                 if (lib.dictOfNumOfBooks[neededBook] > 0):  #checks if the book is in inventory  #####and
@@ -114,6 +133,7 @@ class Client:
             print("the book that you asked for is not in inventory yet")
 
     def returnBook(self):
+        #  executing the returning of a book from the customer to the library
         if len(self.listofBooksInPossetion) == 0:
             print("you have not borrowed any books yet\n")
             return
@@ -158,6 +178,7 @@ class Client:
         return 0
 
     def authenticateJoiLevel(self, client, book):
+        #  to make sure that the book will be joifull to the customer
         if client.comic*book.client + client.dramatic * book.dramatic + client.educational * book.educational >= client.joiThreshold:
             return 1
         else:
@@ -173,7 +194,8 @@ class Client:
                     mostSuitable[1] = book.comic * self.comic + book.dramatic * self.dramatic + book.educational * self.educational
         print("the recommended book for you is " + mostSuitable[0] + " with a score of: " + str(mostSuitable[1]) + "\n")
 
-    def findIndex(self ,bookToDrop):
+    def findIndex(self, bookToDrop):
+        #  find the index of a book in the list of the books that are in the hands of the customer
         i = 0
         for book in self.listofBooksInPossetion:
             if bookToDrop == book.title + " by " + book.author:
