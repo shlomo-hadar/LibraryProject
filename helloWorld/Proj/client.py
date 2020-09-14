@@ -20,9 +20,12 @@ class Client:
         ID += 1
         return ID
 
-    def print_client_info(self):
-        #  prints the client information and pushing the id for the next client
-        print("first name: " + self.first_name + "\nlast name: " + self.last_name + "\nID: " + str(self.id))
+    def __str__(self):
+        """
+        prints out the book information
+        :return: the string representation of the book
+        """
+        return self.first_name + " " + self.last_name
 
     def borrow_book(self):
         #  executing the act of book borrowing by client
@@ -35,11 +38,10 @@ class Client:
                     if self.authenticate_limit_of_books_possessed(lib):
                         lib.dict_of_num_of_books[needed_book] -= 1
                         for cur_book in lib.list_of_books:
-                            if (needed_book == cur_book.title + " by " + cur_book.author) and cur_book.current_borrower == lib.name:
-                                cur_book.current_borrower = self.first_name + " " + self.last_name
+                            if (needed_book == cur_book.title + " by " + cur_book.author) and cur_book.current_holder == lib.name:
+                                cur_book.current_holder = self.first_name + " " + self.last_name
                                 self.list_of_books_in_possetion.append(cur_book)
-                                print("the borrow of the book " + cur_book.title + " by " +
-                                      cur_book.author + " was completed successfully\n")
+                                print("the borrow of the book " + cur_book.title + " by " + cur_book.author + " was completed successfully\n")
                                 success = 1
                                 break
                     else:

@@ -50,7 +50,7 @@ class Library:
             i += 1
         return listInf
 
-    def remove_book_from_library(self):
+    def remove_book(self):
         book_to_remove = input("what book should the system erase from the library? ")
         i = 0
         count = 0
@@ -66,7 +66,7 @@ class Library:
         if deletion_success == 1:
             print("the book " + book_who_got_deleted + " was erased from the library in " + str(count) + " copies")
 
-    def remove_customer_from_library(self):
+    def remove_customer(self):
         first_name = input("what is the first name of the customer you would like to erase from the system? ")
         last_name = input("what is his last name? ")
         id = int(input("what is his id? "))
